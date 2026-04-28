@@ -568,3 +568,52 @@ tbody tr:last-child td {
   .main-content { margin-left: 0; padding: 16px; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* CLI Integration Styles */
+.account-section-title {
+  margin-top: 32px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.cli-command-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cli-command-box code {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
+  word-break: break-all;
+  flex: 1;
+}
+
+.btn-copy {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-copy:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}

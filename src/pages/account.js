@@ -44,9 +44,26 @@ export async function renderAccount(app) {
           </div>
         </div>
 
-        <button id="btn-logout" class="btn-logout">Logout</button>
+        <div class="account-section-title">CLI Integration</div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+          Use this command to authenticate your CLI if the automatic login fails in a remote environment:
+        </p>
+        <div class="cli-command-box">
+          <code id="cli-login-command">./insighta auth-set --access ${localStorage.getItem('access_token')} --refresh ${localStorage.getItem('refresh_token')} --username ${user.username}</code>
+          <button id="btn-copy-cli" class="btn-copy">Copy</button>
+        </div>
+
+        <button id="btn-logout" class="btn-logout" style="margin-top: 24px;">Logout</button>
       </div>
     `;
+
+    document.getElementById('btn-copy-cli').addEventListener('click', () => {
+      const cmd = document.getElementById('cli-login-command').textContent;
+      navigator.clipboard.writeText(cmd);
+      const btn = document.getElementById('btn-copy-cli');
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
 
     document.getElementById('btn-logout').addEventListener('click', async () => {
       try {
