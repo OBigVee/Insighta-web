@@ -6,7 +6,8 @@ export class Router {
   }
 
   resolve() {
-    const hash = window.location.hash.slice(1) || '/login';
+    const rawHash = window.location.hash.slice(1) || '/login';
+    const hash = rawHash.split('?')[0];
     
     // Check for parameterized routes
     for (const [pattern, handler] of Object.entries(this.routes)) {
