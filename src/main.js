@@ -5,6 +5,7 @@ import { renderProfiles } from './pages/profiles.js';
 import { renderProfileDetail } from './pages/profile-detail.js';
 import { renderSearch } from './pages/search.js';
 import { renderAccount } from './pages/account.js';
+import { renderAuthCallback } from './pages/auth-callback.js';
 
 const app = document.getElementById('app');
 
@@ -15,6 +16,7 @@ const router = new Router({
   '/profiles/:id': (params) => renderProfileDetail(app, params),
   '/search': () => renderSearch(app),
   '/account': () => renderAccount(app),
+  '/auth-callback': () => renderAuthCallback(app),
 });
 
 router.start();

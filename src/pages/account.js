@@ -50,7 +50,14 @@ export async function renderAccount(app) {
 
     document.getElementById('btn-logout').addEventListener('click', async () => {
       try {
-        await apiFetch('/auth/logout', { method: 'POST' });
+        const refresh = localStorage.getItem('refresh_token');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        await apiFetch('/auth/logout', { 
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ refresh_token: refresh || '' })
+        });
         window.location.hash = '#/login';
       } catch (err) {
         alert('Logout failed: ' + err.message);
