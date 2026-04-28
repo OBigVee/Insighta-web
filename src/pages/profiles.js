@@ -67,9 +67,37 @@ export async function renderProfiles(app) {
     loadProfiles();
   });
 
-  document.getElementById('btn-export').addEventListener('click', () => {
-    const params = new URLSearchParams({ format: 'csv', ...currentFilters });
-    window.location.href = `${getApiBase()}/api/profiles/export?${params}`;
+  document.getElementById('btn-export').addEventListener('click', async () => {
+    try {
+      const btn = document.getElementById('btn-export');
+      btn.textContent = 'Exporting...';
+      btn.disabled = true;
+
+      const params = new URLSearchParams({ format: 'csv', ...currentFilters });
+      const resp = await apiFetch(`/api/profiles/export?${params}`);
+      
+      if (!resp.ok) {
+        throw new Error('Export failed with status ' + resp.status);
+      }
+      
+      const blob = await resp.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'profiles_export.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+      
+      btn.textContent = 'Export CSV';
+      btn.disabled = false;
+    } catch (e) {
+      alert('Export failed: ' + e.message);
+      const btn = document.getElementById('btn-export');
+      btn.textContent = 'Export CSV';
+      btn.disabled = false;
+    }
   });
 
   document.getElementById('btn-prev').addEventListener('click', () => {
