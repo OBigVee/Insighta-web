@@ -1,4 +1,4 @@
-const API_BASE = window.INSIGHTA_API_URL || 'https://stage1.doxantro.com';
+const API_BASE = window.INSIGHTA_API_URL || 'https://insighta-api-lawrencebolu-dev.apps.rm3.7wse.p1.openshiftapps.com';
 
 export async function apiFetch(path, options = {}) {
   const url = `${API_BASE}${path}`;
